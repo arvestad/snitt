@@ -8,10 +8,10 @@ def load_pairs(h):
     Read identifier pairs, i.e., two identifiers separated by whitespace from the file
     represented by handle h. Return all pairs as a dictionary.
     '''
-    pairs = dict()
+    pairs = dict() #Why dict and not list?
     for line in h:
         a, b = line.split()
-        pairs[(a,b)] = True
+        pairs[(a,b)] = True #(a,b) is counted but not (b,a). This is the cause of the problem.
 
     return pairs
 
@@ -26,10 +26,10 @@ def filter_pairs(h, known_pairs):
     n_unique = 0
     for line in h:
         a, b = line.split()
-        if (a,b) in known_pairs:
-            n_shared += 1
-        else:
-            n_unique += 1
+        is_shared = (((a,b) in known_pairs) or ((b,a) in known_pairs))
+        n_shared += is_shared
+        n_unique += 1 - is_shared
+        #The ordering issue is fixed with this chunk. This fixes the program.
     return n_shared, n_unique
 
 
