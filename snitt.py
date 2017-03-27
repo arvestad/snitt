@@ -18,7 +18,7 @@ def load_pairs(h):
 
 def filter_pairs(h, known_pairs):
     '''
-    Read pairs (like in load_pairs) from the input file h and count how many of the pairs 
+    Read pairs (like in load_pairs) from the input file h and count how many of the pairs
     are shared with what is stored in the dictionary known_pairs. Also count how many
     of the pairs in h are unique to that file. Return the number of shared and unique pairs.
     '''
@@ -26,7 +26,7 @@ def filter_pairs(h, known_pairs):
     n_unique = 0
     for line in h:
         a, b = line.split()
-        if (a,b) in known_pairs:
+        if (a,b) in known_pairs or (b,a) in known_pairs:
             n_shared += 1
         else:
             n_unique += 1
@@ -42,7 +42,7 @@ def main(file1, file2):
         print("Unique 1: ", len(pairs) - n_shared)
         print("Unique 2: ", n_unique)
 
-        
+
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
     args = parser.add_argument("file1")
