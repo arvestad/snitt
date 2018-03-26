@@ -3,6 +3,17 @@
 import argparse
 
 
+def split_sort(line):
+    '''
+    Split line by " " to list and sort list. Return the sorted list element pair.
+
+    '''
+    line = line.split()
+    line.sort()
+    a, b = line[0], line[1]
+    return a, b
+
+
 def load_pairs(h):
     '''
     Read identifier pairs, i.e., two identifiers separated by whitespace from the file
@@ -10,22 +21,21 @@ def load_pairs(h):
     '''
     pairs = dict()
     for line in h:
-        a, b = line.split()
-        pairs[(a,b)] = True
-
+        a, b = split_sort(line)
+        pairs[(a, b)] = True
     return pairs
 
 
 def filter_pairs(h, known_pairs):
     '''
-    Read pairs (like in load_pairs) from the input file h and count how many of the pairs 
+    Read pairs (like in load_pairs) from the input file h and count how many of the pairs
     are shared with what is stored in the dictionary known_pairs. Also count how many
     of the pairs in h are unique to that file. Return the number of shared and unique pairs.
     '''
     n_shared = 0
     n_unique = 0
     for line in h:
-        a, b = line.split()
+        a, b = split_sort(line)
         if (a,b) in known_pairs:
             n_shared += 1
         else:
@@ -42,7 +52,7 @@ def main(file1, file2):
         print("Unique 1: ", len(pairs) - n_shared)
         print("Unique 2: ", n_unique)
 
-        
+
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
     args = parser.add_argument("file1")
