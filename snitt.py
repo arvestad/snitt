@@ -26,7 +26,7 @@ def filter_pairs(h, known_pairs):
     n_unique = 0
     for line in h:
         a, b = line.split()
-        if (a,b) in known_pairs:
+        if (a,b) in known_pairs or (b,a) in known_pairs:  # (a,b) och (b,a) är samma kant
             n_shared += 1
         else:
             n_unique += 1
