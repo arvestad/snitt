@@ -11,8 +11,11 @@ def load_pairs(h):
     pairs = dict()
     for line in h:
         a, b = line.split()
-        pairs[(a,b)] = True
-
+        if a < b:
+            pairs[(a,b)] = True
+        else:
+            pairs[(b,a)] = True
+            
     return pairs
 
 
@@ -26,6 +29,8 @@ def filter_pairs(h, known_pairs):
     n_unique = 0
     for line in h:
         a, b = line.split()
+        if a >= b:
+            a, b = b, a
         
         if (a,b) in known_pairs:
             n_shared += 1
