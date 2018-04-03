@@ -26,7 +26,7 @@ def filter_pairs(h, known_pairs):
     n_unique = 0
     for line in h:
         a, b = line.split()
-        if (a,b) in known_pairs:
+        if ((a,b) in known_pairs) or ((b,a) in known_pairs):
             n_shared += 1
         else:
             n_unique += 1
@@ -44,10 +44,6 @@ def main(file1, file2):
 
         
 if __name__=='__main__':
-    parser = argparse.ArgumentParser()
-    args = parser.add_argument("file1")
-    args = parser.add_argument("file2")
 
-    args=parser.parse_args()
 
-    main(args.file1, args.file2)
+    main('pairs1.txt', 'pairs2.txt')
