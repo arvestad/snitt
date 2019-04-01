@@ -44,8 +44,8 @@ def main(file1, file2):
 
         n_shared, n_unique = filter_pairs(pairs1, pairs2)
         print("Shared:   ", n_shared)
-        print("Unique 2: ", len(pairs2) - n_shared)
         print("Unique 1: ", n_unique)
+        print("Unique 2: ", len(pairs2) - n_shared)
 
         
 if __name__=='__main__':
