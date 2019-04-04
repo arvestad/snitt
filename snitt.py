@@ -2,7 +2,6 @@
 
 import argparse
 
-
 def load_pairs(h):
     '''
     Read identifier pairs, i.e., two identifiers separated by whitespace from the file
@@ -28,6 +27,8 @@ def filter_pairs(h, known_pairs):
         a, b = line.split()
         if (a,b) in known_pairs:
             n_shared += 1
+        elif (b,a) in known_pairs:
+            n_shared += 1
         else:
             n_unique += 1
     return n_shared, n_unique
@@ -41,7 +42,6 @@ def main(file1, file2):
         print("Shared:   ", n_shared)
         print("Unique 1: ", len(pairs) - n_shared)
         print("Unique 2: ", n_unique)
-
         
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
