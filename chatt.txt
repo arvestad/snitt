@@ -1,4 +1,0 @@
-can you see this
-no
-but the text editor doesn't refresh
-so...
