@@ -40,7 +40,7 @@ def main(file1, file2):
 
         n_shared, n_unique = filter_pairs(h2, pairs)
         print("Shared:   ", n_shared)
-        print("Unique 1: ", len(pairs) - n_shared)
+        print("Unique 1: ", len(pairs)/2 - n_shared)
         print("Unique 2: ", n_unique)
 
         
