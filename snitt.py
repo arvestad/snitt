@@ -27,7 +27,9 @@ def filter_pairs(h, known_pairs):
     for line in h:
         a, b = line.split()
         if (a,b) in known_pairs:
-            n_shared += 1
+		n_shared += 1
+	elif (b,a) in known_pairs: 
+		n_shared += 1
         else:
             n_unique += 1
     return n_shared, n_unique
