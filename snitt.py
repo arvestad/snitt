@@ -28,6 +28,8 @@ def filter_pairs(h, known_pairs):
         a, b = line.split()
         if (a,b) in known_pairs:
             n_shared += 1
+        elif (b, a) in known_pairs:  # Added for the possibility that pairs are in reverse order.
+            n_shared += 1
         else:
             n_unique += 1
     return n_shared, n_unique
