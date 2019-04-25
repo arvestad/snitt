@@ -12,21 +12,26 @@ def load_pairs(h):
     for line in h:
         a, b = line.split()
         pairs[(a,b)] = True
-
+        pairs[(b,a)] = True # graph undirected, so pairs unordered
     return pairs
 
 
 def filter_pairs(h, known_pairs):
     '''
-    Read pairs (like in load_pairs) from the input file h and count how many of the pairs 
+    Read pairs (like in load_pairs) from the input file h and count how many of the pairs
     are shared with what is stored in the dictionary known_pairs. Also count how many
     of the pairs in h are unique to that file. Return the number of shared and unique pairs.
     '''
     n_shared = 0
     n_unique = 0
+    seen_pairs = dict() # to record pairs already counted
     for line in h:
         a, b = line.split()
-        if (a,b) in known_pairs:
+        if (a,b) in seen_pairs:
+            continue
+        seen_pairs[(a,b)] = True
+        seen_pairs[(b,a)] = True
+        if (a,b) in known_pairs: # <=> (b,a) in known_pairs
             n_shared += 1
         else:
             n_unique += 1
@@ -39,10 +44,9 @@ def main(file1, file2):
 
         n_shared, n_unique = filter_pairs(h2, pairs)
         print("Shared:   ", n_shared)
-        print("Unique 1: ", len(pairs) - n_shared)
+        print("Unique 1: ", len(pairs)//2 - n_shared) # {a,b} = {(a,b),(b.a)}
         print("Unique 2: ", n_unique)
 
-        
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
     args = parser.add_argument("file1")
