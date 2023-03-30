@@ -26,8 +26,10 @@ def filter_pairs(h, known_pairs):
     n_unique = 0
     for line in h:
         a, b = line.split()
-        if (a,b)  or (b,a)  in known_pairs:			 # Added "or (b,a)" since (a,b) = (b,a).
+        if (a,b) in known_pairs:			
             n_shared += 1
+        elif (b,a) in known_pairs:				# Added elif condition to account for the edges being "reversed" in the line.
+            n_shared += 1 
         else:
             n_unique += 1
     return n_shared, n_unique
