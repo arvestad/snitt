@@ -1,8 +1,5 @@
 #! /usr/bin/env python3
 
-import argparse
-
-
 def load_pairs(h):
     '''
     Read identifier pairs, i.e., two identifiers separated by whitespace from the file
@@ -10,7 +7,7 @@ def load_pairs(h):
     '''
     pairs = dict()
     for line in h:
-        a, b = line.split()
+        a, b = line.split(none,1)
         pairs[(a,b)] = True
 
     return pairs
@@ -25,7 +22,7 @@ def filter_pairs(h, known_pairs):
     n_shared = 0
     n_unique = 0
     for line in h:
-        a, b = line.split()
+        a, b = line.split(none,1)
         if (a,b) in known_pairs:
             n_shared += 1
         else:
@@ -44,10 +41,7 @@ def main(file1, file2):
 
         
 if __name__=='__main__':
-    parser = argparse.ArgumentParser()
-    args = parser.add_argument("file1")
-    args = parser.add_argument("file2")
+    file1 = input("EFirst input file: ")
+    file2 = input("Second input file: ")
 
-    args=parser.parse_args()
-
-    main(args.file1, args.file2)
+    main(file1, file2)
