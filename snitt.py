@@ -2,6 +2,10 @@
 
 import argparse
 
+def check_pairs(h):
+    for line in h:
+        words = row.split()
+        return len(words) > 2
 
 def load_pairs(h):
     '''
@@ -9,12 +13,14 @@ def load_pairs(h):
     represented by handle h. Return all pairs as a dictionary.
     '''
     pairs = dict()
-    for line in h:
-        a, b = line.split()
-        pairs[(a,b)] = True
+    if check_pairs = TRUE:
+        for line in h:
+            a, b = line.split()
+            pairs[(a,b)] = True
 
-    return pairs
-
+        return pairs
+    else:
+           raise ValueError("Not pair")
 
 def filter_pairs(h, known_pairs):
     '''
